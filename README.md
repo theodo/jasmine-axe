@@ -2,10 +2,8 @@
 
 [![npm version](https://img.shields.io/npm/v/axe-for-jasmine.svg)](https://www.npmjs.com/package/axe-for-jasmine)
 ![node](https://img.shields.io/node/v/axe-for-jasmine)
-[![Repository CI Status](https://github.com/nickcolley/axe-for-jasmine/workflows/test/badge.svg)](https://github.com/nickcolley/axe-for-jasmine/actions?query=workflow%3Atest)
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-Custom [Jasmine][https://jasmine.github.io/] matcher for [aXe](https://github.com/dequelabs/axe-core) for testing accessibility
+Custom [Jasmine](https://jasmine.github.io/) matcher for [aXe](https://github.com/dequelabs/axe-core) for testing accessibility
 
 ## Installation:
 
