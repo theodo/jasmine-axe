@@ -168,8 +168,10 @@ const toHaveNoViolations = {
   }
 }
 
-export default {
+const axe = configureAxe();
+
+export {
   configureAxe,
-  axe: configureAxe(),
+  axe,
   toHaveNoViolations, 
 }
