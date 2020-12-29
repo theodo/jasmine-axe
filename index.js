@@ -168,7 +168,7 @@ const toHaveNoViolations = {
   }
 }
 
-module.exports = {
+export default {
   configureAxe,
   axe: configureAxe(),
   toHaveNoViolations, 
