@@ -1,6 +1,6 @@
 {
-  "name": "axe-jasmine",
-  "version": "0.0.0",
+  "name": "axe-for-jasmine",
+  "version": "0.0.2",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {},
@@ -10,10 +10,21 @@
     "chalk": "^4.1.0",
     "lodash.merge": "^4.6.2"
   },
-  "devDependencies": {
-    "ts-node": "3.1.0",
-    "tslint": "^4.3.0",
-    "typescript": "~2.0.3"
-  }
+  "devDependencies": {},
+  "description": "Custom Jasmine matcher for aXe for testing accessibility",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MathildeDuboille/axe-jasmine.git"
+  },
+  "keywords": [
+    "jasmine",
+    "accessibility",
+    "axe",
+    "a11y"
+  ],
+  "author": "Mathilde Duboille",
+  "bugs": {
+    "url": "https://github.com/MathildeDuboille/axe-jasmine/issues"
+  },
+  "homepage": "https://github.com/MathildeDuboille/axe-jasmine#readme"
 }
-
