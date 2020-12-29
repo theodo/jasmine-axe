@@ -1,7 +1,6 @@
 # axe-for-jasmine
 
 [![npm version](https://img.shields.io/npm/v/axe-for-jasmine.svg)](https://www.npmjs.com/package/axe-for-jasmine)
-![node](https://img.shields.io/node/v/axe-for-jasmine)
 
 Custom [Jasmine](https://jasmine.github.io/) matcher for [aXe](https://github.com/dequelabs/axe-core) for testing accessibility
 
@@ -11,7 +10,7 @@ Custom [Jasmine](https://jasmine.github.io/) matcher for [aXe](https://github.co
 npm install --save-dev axe-for-jasmine
 ```
 
-If you're using [TypeScript](https://www.typescriptlang.org/) you will need to add a `d.ts` with the following lines:
+If you're using [TypeScript](https://www.typescriptlang.org/) you will need to add a `d.ts` file with the following lines:
 
 ```javascript
 declare module jasmine {
