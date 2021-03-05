@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "MathildeDuboille",
+      "name": "MathildeDuboille",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35567446?v=4",
+      "profile": "https://github.com/MathildeDuboille",
+      "contributions": [
+        "a11y",
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "jasmine-axe",
+  "projectOwner": "theodo",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
