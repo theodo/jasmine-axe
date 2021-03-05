@@ -14,6 +14,16 @@
         "a11y",
         "code"
       ]
+    },
+    {
+      "login": "AlbericTrancart",
+      "name": "Albéric Trancart",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6317823?v=4",
+      "profile": "http://alberic.trancart.net/",
+      "contributions": [
+        "a11y",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
