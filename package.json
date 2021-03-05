@@ -1,5 +1,5 @@
 {
-  "name": "axe-for-jasmine",
+  "name": "jasmine-axe",
   "version": "0.0.5",
   "license": "MIT",
   "angular-cli": {},
@@ -14,7 +14,7 @@
   "description": "Custom Jasmine matcher for aXe for testing accessibility",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MathildeDuboille/axe-jasmine.git"
+    "url": "git+https://github.com/theodo/jasmine-axe.git"
   },
   "keywords": [
     "jasmine",
@@ -24,7 +24,7 @@
   ],
   "author": "Mathilde Duboille",
   "bugs": {
-    "url": "https://github.com/MathildeDuboille/axe-jasmine/issues"
+    "url": "https://github.com/theodo/jasmine-axe/issues"
   },
-  "homepage": "https://github.com/MathildeDuboille/axe-jasmine#readme"
+  "homepage": "https://github.com/theodo/jasmine-axe#readme"
 }

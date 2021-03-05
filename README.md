@@ -1,13 +1,13 @@
-# axe-for-jasmine
+# jasmine-axe
 
-[![npm version](https://img.shields.io/npm/v/axe-for-jasmine.svg)](https://www.npmjs.com/package/axe-for-jasmine)
+[![npm version](https://img.shields.io/npm/v/jasmine-axe.svg)](https://www.npmjs.com/package/jasmine-axe)
 
 Custom [Jasmine](https://jasmine.github.io/) matcher for [aXe](https://github.com/dequelabs/axe-core) for testing accessibility
 
 ## Installation:
 
 ```bash
-npm install --save-dev axe-for-jasmine
+npm install --save-dev jasmine-axe
 ```
 
 If you're using [TypeScript](https://www.typescriptlang.org/) you will need to add a `d.ts` file with the following lines:
@@ -23,7 +23,7 @@ declare module jasmine {
 ## Usage:
 
 ```javascript
-import { axe, toHaveNoViolations } from "axe-for-jasmine";
+import { axe, toHaveNoViolations } from "jasmine-axe";
 import TestComponent from "./TestComponent.component";
 
 describe("TestComponent", () => {
@@ -50,7 +50,7 @@ describe("TestComponent", () => {
 The `axe` function allows options to be set with the [same options as documented in axe-core](https://github.com/dequelabs/axe-core/blob/master/doc/API.md#options-parameter):
 
 ```javascript
-import { axe, toHaveNoViolations } from "axe-for-jasmine";
+import { axe, toHaveNoViolations } from "jasmine-axe";
 
 describe("TestComponent", () => {
   beforeEach(() => {
@@ -90,7 +90,7 @@ This could be done in [Jest's setup step](https://jestjs.io/docs/en/setup-teardo
 
 ```javascript
 // Global helper file (axe-helper.js)
-import { configureAxe } from "axe-for-jasmine";
+import { configureAxe } from "jasmine-axe";
 
 const axe = configureAxe({
   rules: {
@@ -104,7 +104,7 @@ export default axe;
 
 ```javascript
 // Individual test file (test.js)
-import { toHaveNoViolations } from "axe-for-jasmine";
+import { toHaveNoViolations } from "jasmine-axe";
 import axe from "./axe-helper.js";
 
 describe("TestComponent", () => {
@@ -135,7 +135,7 @@ The configuration object passed to `configureAxe`, accepts a `globalOptions` pro
 
 ```javascript
 // Global helper file (axe-helper.js)
-import { configureAxe } from "axe-for-jasmine";
+import { configureAxe } from "jasmine-axe";
 
 const axe = configureAxe({
   globalOptions: {
@@ -155,7 +155,7 @@ An array which defines which [impact](https://github.com/dequelabs/axe-core/blob
 
 ```javascript
 // Global helper file (axe-helper.js)
-import { configureAxe } from "axe-for-jasmine";
+import { configureAxe } from "jasmine-axe";
 
 const axe = configureAxe({
   impactLevels: ["critical"],
