@@ -1,16 +1,22 @@
 {
   "name": "jasmine-axe",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "license": "MIT",
   "angular-cli": {},
-  "scripts": {},
-  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "main": "./index.js",
+  "types": "./index.d.ts",
   "dependencies": {
-    "axe-core": "^4.1.1",
-    "chalk": "^4.1.0",
+    "axe-core": "^4.1.3",
     "lodash.merge": "^4.6.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/jasmine": "^3.6.4",
+    "@types/lodash.merge": "^4.6.6",
+    "typescript": "^4.2.3"
+  },
   "description": "Custom Jasmine matcher for aXe for testing accessibility",
   "repository": {
     "type": "git",

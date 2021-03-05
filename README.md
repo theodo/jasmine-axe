@@ -10,19 +10,10 @@ Custom [Jasmine](https://jasmine.github.io/) matcher for [aXe](https://github.co
 npm install --save-dev jasmine-axe
 ```
 
-If you're using [TypeScript](https://www.typescriptlang.org/) you will need to add a `d.ts` file with the following lines:
-
-```javascript
-declare module jasmine {
-    interface Matchers<T> {
-        toHaveNoViolations(): void;
-    }
-}
-```
-
 ## Usage:
 
 ```javascript
+import { TestBed } from "@angular/core/testing";
 import { axe, toHaveNoViolations } from "jasmine-axe";
 import TestComponent from "./TestComponent.component";
 
@@ -37,10 +28,7 @@ describe("TestComponent", () => {
 
   it("should pass accessibility test", async () => {
     const fixture = TestBed.createComponent(TestComponent);
-    const render = () => fixture.nativeElement;
-    const html = render();
-
-    expect(await axe(html)).toHaveNoViolations();
+    expect(await axe(fixture.nativeElement)).toHaveNoViolations();
   });
 });
 ```
@@ -86,7 +74,7 @@ If you find yourself repeating the same options multiple times, you can export a
 
 Note: You can still pass additional options to this new instance; they will be merged with the defaults.
 
-This could be done in [Jest's setup step](https://jestjs.io/docs/en/setup-teardown)
+The configuration object passed to `configureAxe` also accepts a `globalOptions` property to configure the format of the data used by axe and to add custom checks and rules. The property value is the same as the parameter passed to [axe.configure](https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-1).
 
 ```javascript
 // Global helper file (axe-helper.js)
@@ -97,72 +85,12 @@ const axe = configureAxe({
     // for demonstration only, don't disable rules that need fixing.
     "image-alt": { enabled: false },
   },
-});
-
-export default axe;
-```
-
-```javascript
-// Individual test file (test.js)
-import { toHaveNoViolations } from "jasmine-axe";
-import axe from "./axe-helper.js";
-
-describe("TestComponent", () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [],
-    });
-    TestBed.compileComponents();
-    jasmine.addMatchers(toHaveNoViolations);
-  });
-
-  it("should demonstrate this matcher`s usage with a default config", async () => {
-    const render = () => `
-        <div>
-            <img src="#"/>
-        </div>
-    `;
-    const html = render();
-
-    expect(await axe(html)).toHaveNoViolations();
-  });
-});
-```
-
-### Setting custom rules and checks.
-
-The configuration object passed to `configureAxe`, accepts a `globalOptions` property to configure the format of the data used by axe and to add custom checks and rules. The property value is the same as the parameter passed to [axe.configure](https://github.com/dequelabs/axe-core/blob/master/doc/API.md#parameters-1).
-
-```javascript
-// Global helper file (axe-helper.js)
-import { configureAxe } from "jasmine-axe";
-
-const axe = configureAxe({
   globalOptions: {
     checks: [
       /* custom checks definitions */
     ],
   },
-  // ...
 });
 
 export default axe;
 ```
-
-### Setting the level of user impact.
-
-An array which defines which [impact](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md) level should be considered. This ensures that only violations with a specific impact on the user are considered. The level of impact can be "minor", "moderate", "serious", or "critical".
-
-```javascript
-// Global helper file (axe-helper.js)
-import { configureAxe } from "jasmine-axe";
-
-const axe = configureAxe({
-  impactLevels: ["critical"],
-  // ...
-});
-
-export default axe;
-```
-
-Refer to [Developing Axe-core Rules](https://github.com/dequelabs/axe-core/blob/master/doc/rule-development.md) for instructions on how to develop custom rules and checks.
