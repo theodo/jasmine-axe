@@ -9,11 +9,13 @@ export interface JasmineAxeConfigureOptions extends RunOptions {
  */
 export declare const configureAxe: (options?: JasmineAxeConfigureOptions) => (html: Element, additionalOptions?: {}) => Promise<unknown>;
 export declare const toHaveNoViolations: jasmine.CustomMatcherFactories;
+export declare const toHaveLessThanXViolations: jasmine.CustomMatcherFactories;
 export declare const axe: (html: Element, additionalOptions?: {}) => Promise<unknown>;
 declare global {
     namespace jasmine {
         interface Matchers<T> {
             toHaveNoViolations(): void;
+            toHaveLessThanXViolations(allowedViolations: number): void;
         }
     }
     interface Node {
