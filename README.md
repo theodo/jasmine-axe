@@ -17,7 +17,7 @@ npm install --save-dev jasmine-axe
 
 ```javascript
 import { TestBed } from "@angular/core/testing";
-import { axe, toHaveNoViolations } from "jasmine-axe";
+import { axe, toHaveNoViolations, toHaveLessThanXViolations } from "jasmine-axe";
 import TestComponent from "./TestComponent.component";
 
 describe("TestComponent", () => {
@@ -27,11 +27,16 @@ describe("TestComponent", () => {
     });
     TestBed.compileComponents();
     jasmine.addMatchers(toHaveNoViolations);
+    jasmine.addMatchers(toHaveLessThanXViolations);
   });
 
   it("should pass accessibility test", async () => {
     const fixture = TestBed.createComponent(TestComponent);
     expect(await axe(fixture.nativeElement)).toHaveNoViolations();
+  });
+  it("should have less than 2 accessibility issues", async () => {
+    const fixture = TestBed.createComponent(TestComponent);
+    expect(await axe(fixture.nativeElement)).toHaveLessThanXViolations(2);
   });
 });
 ```
