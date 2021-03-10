@@ -93,13 +93,15 @@ const reporter = (violations: Result[], allowedViolations?:number): string => {
   const lineBreak = "\n\n";
   const horizontalLine = "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500";
 
-  return violations
+  const violationsSummary = `${violations.length} violations found. \n\n Expect to have ${allowedViolations ? 'less than '+ allowedViolations : 'no'} violations.`
+
+  return violationsSummary + lineBreak +horizontalLine+lineBreak+ violations
     .map((violation) => {
       const errorBody = violation.nodes
         .map((node) => {
           const selector = node.target.join(", ");
           const expectedText =
-            `Expected the HTML found at $('${selector}') to have ${allowedViolations ? 'less than ' + allowedViolations :'no'} violations:` +
+            `Violation found at $('${selector}')` +
             lineBreak;
           return (
             expectedText +

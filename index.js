@@ -111,12 +111,13 @@ var reporter = function (violations, allowedViolations) {
     }
     var lineBreak = "\n\n";
     var horizontalLine = "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500";
-    return violations
+    var violationsSummary = violations.length + " violations found. \n\n Expect to have " + (allowedViolations ? 'less than ' + allowedViolations : 'no') + " violations.";
+    return violationsSummary + lineBreak + horizontalLine + lineBreak + violations
         .map(function (violation) {
         var errorBody = violation.nodes
             .map(function (node) {
             var selector = node.target.join(", ");
-            var expectedText = "Expected the HTML found at $('" + selector + "') to have " + (allowedViolations ? 'less than ' + allowedViolations : 'no') + " violations:" +
+            var expectedText = "Violation found at $('" + selector + "')" +
                 lineBreak;
             return (expectedText +
                 node.html +
