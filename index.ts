@@ -85,7 +85,7 @@ export const configureAxe = (options: JasmineAxeConfigureOptions = {}) => {
 /**
  * Format violations into a nice error message
  */
-const reporter = (violations: Result[]): string => {
+const reporter = (violations: Result[], allowedViolations?:number): string => {
   if (violations.length === 0) {
     return "";
   }
@@ -93,13 +93,15 @@ const reporter = (violations: Result[]): string => {
   const lineBreak = "\n\n";
   const horizontalLine = "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500";
 
-  return violations
+  const violationsSummary = `${violations.length} violations found. \n\n Expect to have ${allowedViolations ? 'less than '+ allowedViolations : 'no'} violations.`
+
+  return violationsSummary + lineBreak + horizontalLine + lineBreak + violations
     .map((violation) => {
       const errorBody = violation.nodes
         .map((node) => {
           const selector = node.target.join(", ");
           const expectedText =
-            `Expected the HTML found at $('${selector}') to have no violations:` +
+            `Violation found at $('${selector}')` +
             lineBreak;
           return (
             expectedText +
@@ -135,13 +137,30 @@ const toHaveNoViolationsMatcher = (): jasmine.CustomMatcher => ({
 
     return {
       message: reporter(violations),
-      pass: violations.length === 0,
+      pass:  violations.length === 0,
+    };
+  },
+});
+
+const toHaveLessThanXViolationsMatcher = (): jasmine.CustomMatcher => ({
+  compare: (results: AxeResults, allowedViolations:number): jasmine.CustomMatcherResult => {
+    if (typeof results.violations === "undefined") {
+      throw new Error("No violations found in aXe results object");
+    }
+    const { violations } = results;
+
+    return {
+      message: reporter(violations, allowedViolations),
+      pass: violations.length <= allowedViolations,
     };
   },
 });
 
 export const toHaveNoViolations: jasmine.CustomMatcherFactories = {
-  toHaveNoViolations: toHaveNoViolationsMatcher,
+  toHaveNoViolations: () => toHaveNoViolationsMatcher(),
+};
+export const toHaveLessThanXViolations: jasmine.CustomMatcherFactories = {
+  toHaveLessThanXViolations: () => toHaveLessThanXViolationsMatcher(),
 };
 
 export const axe = configureAxe();
@@ -150,6 +169,7 @@ declare global {
   namespace jasmine {
     interface Matchers<T> {
       toHaveNoViolations(): void;
+      toHaveLessThanXViolations(allowedViolations:number): void;
     }
   }
 

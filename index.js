@@ -33,7 +33,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.axe = exports.toHaveNoViolations = exports.configureAxe = void 0;
+exports.axe = exports.toHaveLessThanXViolations = exports.toHaveNoViolations = exports.configureAxe = void 0;
 var axeCore = __importStar(require("axe-core"));
 var lodash_merge_1 = __importDefault(require("lodash.merge"));
 /**
@@ -105,18 +105,19 @@ exports.configureAxe = configureAxe;
 /**
  * Format violations into a nice error message
  */
-var reporter = function (violations) {
+var reporter = function (violations, allowedViolations) {
     if (violations.length === 0) {
         return "";
     }
     var lineBreak = "\n\n";
     var horizontalLine = "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500";
-    return violations
+    var violationsSummary = violations.length + " violations found. \n\n Expect to have " + (allowedViolations ? 'less than ' + allowedViolations : 'no') + " violations.";
+    return violationsSummary + lineBreak + horizontalLine + lineBreak + violations
         .map(function (violation) {
         var errorBody = violation.nodes
             .map(function (node) {
             var selector = node.target.join(", ");
-            var expectedText = "Expected the HTML found at $('" + selector + "') to have no violations:" +
+            var expectedText = "Violation found at $('" + selector + "')" +
                 lineBreak;
             return (expectedText +
                 node.html +
@@ -151,7 +152,22 @@ var toHaveNoViolationsMatcher = function () { return ({
         };
     },
 }); };
+var toHaveLessThanXViolationsMatcher = function () { return ({
+    compare: function (results, allowedViolations) {
+        if (typeof results.violations === "undefined") {
+            throw new Error("No violations found in aXe results object");
+        }
+        var violations = results.violations;
+        return {
+            message: reporter(violations, allowedViolations),
+            pass: violations.length <= allowedViolations,
+        };
+    },
+}); };
 exports.toHaveNoViolations = {
-    toHaveNoViolations: toHaveNoViolationsMatcher,
+    toHaveNoViolations: function () { return toHaveNoViolationsMatcher(); },
+};
+exports.toHaveLessThanXViolations = {
+    toHaveLessThanXViolations: function () { return toHaveLessThanXViolationsMatcher(); },
 };
 exports.axe = exports.configureAxe();
