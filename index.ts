@@ -95,7 +95,7 @@ const reporter = (violations: Result[], allowedViolations?:number): string => {
 
   const violationsSummary = `${violations.length} violations found. \n\n Expect to have ${allowedViolations ? 'less than '+ allowedViolations : 'no'} violations.`
 
-  return violationsSummary + lineBreak +horizontalLine+lineBreak+ violations
+  return violationsSummary + lineBreak + horizontalLine + lineBreak + violations
     .map((violation) => {
       const errorBody = violation.nodes
         .map((node) => {
