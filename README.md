@@ -15,6 +15,8 @@ npm install --save-dev jasmine-axe
 
 ## Usage:
 
+### Check that there are no violations
+
 ```javascript
 import { TestBed } from "@angular/core/testing";
 import { axe, toHaveNoViolations } from "jasmine-axe";
@@ -36,9 +38,12 @@ describe("TestComponent", () => {
 });
 ```
 
+### Allow some violations (for a temporary period)
+
 If you want to add an accessibility check on an existing project, you will probably find many accessibility issues, and you may not have time to fix them right away.
 Instead of skipping the test until you have time to fix the issues, you can use another matcher `toHaveLessThanXViolations`. You will be able to prevent new accessibility issues to appear.
 This matcher should be use as a temporary fix, the objective is of course to have no violations at all.
+
 ```javascript
 import { TestBed } from "@angular/core/testing";
 import { axe, toHaveLessThanXViolations } from "jasmine-axe";
@@ -121,6 +126,19 @@ const axe = configureAxe({
 
 export default axe;
 ```
+
+## How does it work
+
+We export 2 custom matchers for Jasmine.  
+The goal is to make it super easy for developers to add automatic accessibility checks, even if they're not really familiar with accessibility, and aXe.  
+
+The matchers are just a way to encapsulate what we're testing: use the comparison we want and add a specific error message in case the check fails.
+- `toHaveNoViolations`: check that there are no violations at all, and if that check fails, display the results from aXe.
+- `toHaveLessThanXViolations`: check that there are less than allowed violations. Always display the result from aXe.
+
+## Thanks
+- [jest-axe](https://github.com/nickcolley/jest-axe) for the original idea and all the helpers that make testing with aXe super easy.
+- [axe](https://www.deque.com/axe/) for the incredible axe-core that makes accessibility testing easy for everyone
 
 ## Contributors ✨
 
